@@ -4,6 +4,7 @@ import (
     "log"
     "net/http"
     "github.com/gorilla/mux"
+    "turritopsis-rest/controllers"
 )
 
 type routeMapStruct struct {
@@ -14,24 +15,9 @@ type routeMapStruct struct {
 
 var routingCollection = [4]routeMapStruct{
   routeMapStruct{
-    urlRoute: "/people",
-    routeFunction: GetPeople,
-    method: "GET",
-  },
-  routeMapStruct{
-    urlRoute: "/people/{id}",
-    routeFunction: GetPerson,
-    method: "GET",
-  },
-  routeMapStruct{
-    urlRoute: "/people/{id}",
-    routeFunction: CreatePerson,
+    urlRoute: "/login",
+    routeFunction: controllers.Login,
     method: "POST",
-  },
-  routeMapStruct{
-    urlRoute: "/people/{id}", 
-    routeFunction: DeletePerson,
-    method: "DELETE",
   },
 }
 
