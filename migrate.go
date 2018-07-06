@@ -8,8 +8,36 @@ import (
   _ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
-var modelCollection = [1]interface{}{
+type relationStruct struct {
+  model     interface{}
+  field     string
+  dest      string
+  onDelete  string
+  onUpdate  string
+}
+
+var modelCollection = [11]interface{} {
+  &models.InwardInvoice{},
+  &models.InwardInvoiceDetail{},
+  &models.Order{},
+  &models.OutwardInvoice{},
+  &models.OutwardInvoiceDetail{},
+  &models.Procure{},
+  &models.Product{},
+  &models.Seller{},
+  &models.StoreFront{},
   &models.User{},
+  &models.Warehouse{},
+}
+
+var relationCollection = [1]relationStruct {
+  relationStruct{
+    model: &models.InwardInvoice{},
+    field: "procure_id",
+    dest: "procures(id)",
+    onDelete: "RESTRICT",
+    onUpdate: "RESTRICT",
+  },
 }
 
 func migrate() {
@@ -34,5 +62,14 @@ func migrate() {
 
   for _, element := range modelCollection {
     db.AutoMigrate(element)
+  }
+
+  for _, element := range relationCollection {
+    db.Model(element.model).AddForeignKey(
+      element.field,
+      element.dest,
+      element.onDelete,
+      element.onUpdate,
+    )
   }
 }

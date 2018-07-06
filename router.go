@@ -13,11 +13,16 @@ type routeMapStruct struct {
   method string
 }
 
-var routingCollection = [4]routeMapStruct{
+var routingCollection = [2]routeMapStruct {
   routeMapStruct{
     urlRoute: "/login",
     routeFunction: controllers.Login,
     method: "POST",
+  },
+  routeMapStruct{
+    urlRoute: "/product",
+    routeFunction: controllers.ShowProducts,
+    method: "GET",
   },
 }
 
