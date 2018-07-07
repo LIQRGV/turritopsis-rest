@@ -47,8 +47,8 @@ var relationCollection = [14]relationStruct {
   },
   relationStruct{
     model: &models.InwardInvoiceDetail{},
-    field: "inward_invoice_id",
-    dest: "inward_invoices(id)",
+    field: "inward_invoice_invoice_code",
+    dest: "inward_invoices(invoice_code)",
     onDelete: "RESTRICT",
     onUpdate: "RESTRICT",
   },
@@ -89,8 +89,8 @@ var relationCollection = [14]relationStruct {
   },
   relationStruct{
     model: &models.OutwardInvoiceDetail{},
-    field: "inward_invoice_id",
-    dest: "inward_invoices(id)",
+    field: "inward_invoice_invoice_code",
+    dest: "inward_invoices(invoice_code)",
     onDelete: "RESTRICT",
     onUpdate: "RESTRICT",
   },
@@ -110,8 +110,8 @@ var relationCollection = [14]relationStruct {
   },
   relationStruct{
     model: &models.Storefront{},
-    field: "inward_invoice_id",
-    dest: "inward_invoices(id)",
+    field: "inward_invoice_invoice_code",
+    dest: "inward_invoices(invoice_code)",
     onDelete: "RESTRICT",
     onUpdate: "RESTRICT",
   },
@@ -124,8 +124,8 @@ var relationCollection = [14]relationStruct {
   },
   relationStruct{
     model: &models.Warehouse{},
-    field: "inward_invoice_id",
-    dest: "inward_invoices(id)",
+    field: "inward_invoice_invoice_code",
+    dest: "inward_invoices(invoice_code)",
     onDelete: "RESTRICT",
     onUpdate: "RESTRICT",
   },

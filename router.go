@@ -14,11 +14,56 @@ type routeMapStruct struct {
   query map[string]string
 }
 
-var routingCollection = [6]routeMapStruct {
+var routingCollection = [15]routeMapStruct {
   routeMapStruct{
     urlRoute: "/login",
     routeFunction: controllers.Login,
     method: "POST",
+  },
+  routeMapStruct{
+    urlRoute: "/inward_invoice",
+    routeFunction: controllers.ShowInwardInvoices,
+    method: "GET",
+  },
+  routeMapStruct{
+    urlRoute: "/inward_invoice/{invoice_code}",
+    routeFunction: controllers.GetInwardInvoice,
+    method: "GET",
+  },
+  routeMapStruct{
+    urlRoute: "/inward_invoice/{invoice_code}",
+    routeFunction: controllers.CreateInwardInvoice,
+    method: "POST",
+  },
+  routeMapStruct{
+    urlRoute: "/inward_invoice/{invoice_code}",
+    routeFunction: controllers.UpdateInwardInvoice,
+    method: "PUT",
+  },
+  routeMapStruct{
+    urlRoute: "/inward_invoice/{invoice_code}",
+    routeFunction: controllers.DeleteInwardInvoice,
+    method: "DELETE",
+  },
+  routeMapStruct{
+    urlRoute: "/inward_invoice_detail",
+    routeFunction: controllers.ShowInwardInvoiceDetails,
+    method: "GET",
+  },
+  routeMapStruct{
+    urlRoute: "/inward_invoice_detail/",
+    routeFunction: controllers.GetInwardInvoiceDetail,
+    method: "GET",
+  },
+  routeMapStruct{
+    urlRoute: "/inward_invoice_detail",
+    routeFunction: controllers.CreateInwardInvoiceDetail,
+    method: "POST",
+  },
+  routeMapStruct{
+    urlRoute: "/inward_invoice_detail",
+    routeFunction: controllers.UpdateInwardInvoiceDetail,
+    method: "PUT",
   },
   routeMapStruct{
     urlRoute: "/product",

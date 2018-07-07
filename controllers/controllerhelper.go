@@ -74,7 +74,6 @@ func genericGet(
   } else {
     json.NewEncoder(w).Encode(model)
   }
-
 }
 
 func genericCreate(
@@ -176,6 +175,109 @@ func genericDelete(
   }
 }
 
+func genericQueryGet(
+  w http.ResponseWriter, r *http.Request, model interface{},
+  allowedSearchKey []string) {
+  w.Header().Set("Content-Type", "application/json")
+
+  var queryValueMap = r.URL.Query()
+  var queryMap = map[string]interface{}{}
+
+  var isValid = false
+  if len(queryValueMap) > 0 {
+    for k, v := range queryValueMap{
+      isValid = false
+      for _, key := range allowedSearchKey {
+        if k == key {
+          queryMap[k] = v[0]
+          isValid = true
+          break
+        }
+      }
+      if !isValid {
+        break
+      }
+    }
+  }
+
+  if !isValid {
+    var errorMessage = "Key is unknown or not allowed"
+    var responseMap = map[string]string {
+      "message": errorMessage,
+    }
+    w.WriteHeader(http.StatusNotAcceptable)
+    json.NewEncoder(w).Encode(responseMap)
+    return
+  }
+
+  var connectionInfo = db.Where(queryMap).Find(&model)
+
+  if connectionInfo.Error != nil {
+    w.WriteHeader(http.StatusNotFound)
+    json.NewEncoder(w).Encode(constEMPTY)
+  } else {
+    json.NewEncoder(w).Encode(model)
+  }
+}
+
+func genericQueryUpdate(
+  w http.ResponseWriter, r *http.Request, model interface{},
+  primaryKeys []string) {
+  w.Header().Set("Content-Type", "application/json")
+
+  var isInputAccepted = validateInput(r.Body, model)
+
+  if !isInputAccepted {
+    var errorMessage = "Wrong Format JSON"
+    var responseMap = map[string]string {
+      "message": errorMessage,
+    }
+    w.WriteHeader(http.StatusBadRequest)
+    json.NewEncoder(w).Encode(responseMap)
+    return
+  }
+
+  var modelStruct = structToMap(model)
+  var queryMap = map[string]interface{}{}
+  var queryUpdate = map[string]interface{}{}
+
+  for key, value := range modelStruct {
+    var inPrimaryKey = false
+    for _, k := range primaryKeys {
+      if key == k {
+        inPrimaryKey = true
+        break
+      }
+    }
+
+    if inPrimaryKey {
+      queryMap[key] = value
+    } else {
+      queryUpdate[key] = value
+    }
+  }
+
+  var noRecordError = db.Where(queryMap).Find(model).Error
+  if noRecordError != nil {
+    w.WriteHeader(http.StatusNotFound)
+    json.NewEncoder(w).Encode(constEMPTY)
+  }
+
+  var connectionInfo = db.Model(&model).Updates(queryUpdate)
+
+  if connectionInfo.Error != nil {
+    var errorMessage = fmt.Sprintf("%s", connectionInfo.Error)
+    var responseMap = map[string]string {
+      "message": errorMessage,
+    }
+    w.WriteHeader(http.StatusConflict)
+    json.NewEncoder(w).Encode(responseMap)
+    return
+  }
+
+  json.NewEncoder(w).Encode(model)
+}
+
 // ====== HACKISH UTIL
 
 func setPrimaryKey(model interface{}, primaryKey string, code string) {
@@ -193,8 +295,8 @@ func setPrimaryKey(model interface{}, primaryKey string, code string) {
   }
 }
 
-func structToMap(sourceStruct interface{}) map[string]string {
-  var resultMap map[string]string
+func structToMap(sourceStruct interface{}) map[string]interface{} {
+  var resultMap map[string]interface{}
 	marshaledStruct, _ := json.Marshal(sourceStruct)
 	json.Unmarshal(marshaledStruct, &resultMap)
 
