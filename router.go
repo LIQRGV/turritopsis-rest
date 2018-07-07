@@ -11,9 +11,10 @@ type routeMapStruct struct {
   urlRoute string
   routeFunction func(http.ResponseWriter, *http.Request)
   method string
+  query map[string]string
 }
 
-var routingCollection = [2]routeMapStruct {
+var routingCollection = [6]routeMapStruct {
   routeMapStruct{
     urlRoute: "/login",
     routeFunction: controllers.Login,
@@ -23,6 +24,26 @@ var routingCollection = [2]routeMapStruct {
     urlRoute: "/product",
     routeFunction: controllers.ShowProducts,
     method: "GET",
+  },
+  routeMapStruct{
+    urlRoute: "/product/{code}",
+    routeFunction: controllers.GetProduct,
+    method: "GET",
+  },
+  routeMapStruct{
+    urlRoute: "/product/{code}",
+    routeFunction: controllers.CreateProduct,
+    method: "POST",
+  },
+  routeMapStruct{
+    urlRoute: "/product/{code}",
+    routeFunction: controllers.UpdateProduct,
+    method: "PUT",
+  },
+  routeMapStruct{
+    urlRoute: "/product/{code}",
+    routeFunction: controllers.DeleteProduct,
+    method: "DELETE",
   },
 }
 
