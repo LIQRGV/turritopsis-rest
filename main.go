@@ -1,6 +1,7 @@
 package main
 
 import (
+  "turritopsis-rest/controllers"
   "github.com/joho/godotenv"
   "fmt"
 )
@@ -14,5 +15,6 @@ func main() {
   }
 
   migrate()
+  controllers.InitController()
   startRouter(":6789")
 }
