@@ -9,6 +9,4 @@ type OutwardInvoice struct {
   Date              time.Time
   UserId            int
   TotalPrice        float64
-
-  User              User    `gorm:"foreignkey:ID;association_foreignkey:UserId"`
 }

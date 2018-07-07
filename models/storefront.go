@@ -4,8 +4,8 @@ import (
   "time"
 )
 
-type StoreFront struct {
-  ProductId       int     `gorm:"index"`
+type Storefront struct {
+  ProductCode     string     `gorm:"type:varchar(512);index"`
   Amount          int
   MutationTime    time.Time
   InwardInvoiceId int

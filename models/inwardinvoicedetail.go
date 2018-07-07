@@ -6,7 +6,7 @@ import (
 
 type InwardInvoiceDetail struct {
   InwardInvoiceId   int    `gorm:"unique_index"`
-  ProductId         int
+  ProductCode       string `gorm:"type:varchar(512);index"`
   Date              time.Time
   Expired           time.Time
   Amount            int

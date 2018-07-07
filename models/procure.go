@@ -9,6 +9,4 @@ type Procure struct {
   Date            time.Time
   SellerId        int
   UserId          int
-
-  InwardInvoice   InwardInvoice
 }

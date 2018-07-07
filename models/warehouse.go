@@ -5,7 +5,7 @@ import (
 )
 
 type Warehouse struct {
-  ProductId       int     `gorm:"index"`
+  ProductCode     string    `gorm:"type:varchar(512);index"`
   Amount          int
   ArrivalTime     time.Time
   InwardInvoiceId int
