@@ -2,7 +2,6 @@ package controllers
 
 import (
   "net/http"
-  "encoding/json"
   "turritopsis-rest/models"
 )
 

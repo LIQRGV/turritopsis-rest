@@ -7,11 +7,11 @@ import (
 )
 
 func ShowProducts(w http.ResponseWriter, r *http.Request) {
-  var products []models.Product
+  var models []models.Product
 
-  db.Find(&products)
+  db.Find(&models)
 
-  json.NewEncoder(w).Encode(products)
+  json.NewEncoder(w).Encode(models)
 }
 
 func GetProduct(w http.ResponseWriter, r *http.Request) {

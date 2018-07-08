@@ -35,9 +35,3 @@ func UpdateInwardInvoice(w http.ResponseWriter, r *http.Request) {
   genericUpdate(w, r, &model, primaryKey)
 }
 
-func DeleteInwardInvoice(w http.ResponseWriter, r *http.Request) {
-  var model models.InwardInvoice
-  var primaryKey = "invoice_code"
-
-  genericDelete(w, r, &model, primaryKey)
-}

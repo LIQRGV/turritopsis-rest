@@ -241,6 +241,7 @@ func genericQueryUpdate(
   var queryMap = map[string]interface{}{}
   var queryUpdate = map[string]interface{}{}
 
+  var primaryKeySatisfied = 0
   for key, value := range modelStruct {
     var inPrimaryKey = false
     for _, k := range primaryKeys {
@@ -251,10 +252,21 @@ func genericQueryUpdate(
     }
 
     if inPrimaryKey {
+      primaryKeySatisfied += 1
       queryMap[key] = value
     } else {
       queryUpdate[key] = value
     }
+  }
+
+  if len(primaryKeys) != primaryKeySatisfied {
+    var errorMessage = "Not All Primary Key Satisfied"
+    var responseMap = map[string]string {
+      "message": errorMessage,
+    }
+    w.WriteHeader(http.StatusBadRequest)
+    json.NewEncoder(w).Encode(responseMap)
+    return
   }
 
   var noRecordError = db.Where(queryMap).Find(model).Error
