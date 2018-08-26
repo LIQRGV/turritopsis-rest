@@ -1,7 +1,7 @@
 package main
 
 import (
-  "turritopsis-rest/controllers"
+  "github.com/liqrgv/turritopsis-rest/controllers"
   "github.com/joho/godotenv"
   "fmt"
 )

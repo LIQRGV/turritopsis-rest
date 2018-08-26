@@ -3,7 +3,7 @@ package main
 import (
   "os"
   "fmt"
-  "turritopsis-rest/models"
+  "github.com/liqrgv/turritopsis-rest/models"
   "github.com/jinzhu/gorm"
   _ "github.com/jinzhu/gorm/dialects/postgres"
 )

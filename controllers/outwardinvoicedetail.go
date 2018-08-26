@@ -2,7 +2,7 @@ package controllers
 
 import (
   "net/http"
-  "turritopsis-rest/models"
+  "github.com/liqrgv/turritopsis-rest/models"
 )
 
 func ShowOutwardInvoiceDetails(w http.ResponseWriter, r *http.Request) {

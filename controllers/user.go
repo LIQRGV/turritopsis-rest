@@ -3,7 +3,7 @@ package controllers
 import (
   "net/http"
   "encoding/json"
-  "turritopsis-rest/models"
+  "github.com/liqrgv/turritopsis-rest/models"
 )
 
 func ShowUsers(w http.ResponseWriter, r *http.Request) {

@@ -4,7 +4,7 @@ import (
     "log"
     "net/http"
     "github.com/gorilla/mux"
-    "turritopsis-rest/controllers"
+    "github.com/liqrgv/turritopsis-rest/controllers"
 )
 
 type routeMapStruct struct {
@@ -15,13 +15,11 @@ type routeMapStruct struct {
 }
 
 var routingCollection = [50]routeMapStruct {
-  // 1
   routeMapStruct{
     urlRoute: "/login",
     routeFunction: controllers.Login,
     method: "POST",
   },
-  // 4
   routeMapStruct{
     urlRoute: "/inward_invoice",
     routeFunction: controllers.ShowInwardInvoices,
@@ -42,7 +40,6 @@ var routingCollection = [50]routeMapStruct {
     routeFunction: controllers.UpdateInwardInvoice,
     method: "PUT",
   },
-  // 4
   routeMapStruct{
     urlRoute: "/inward_invoice_detail",
     routeFunction: controllers.ShowInwardInvoiceDetails,
@@ -63,7 +60,6 @@ var routingCollection = [50]routeMapStruct {
     routeFunction: controllers.UpdateInwardInvoiceDetail,
     method: "PUT",
   },
-  // 5
   routeMapStruct{
     urlRoute: "/order",
     routeFunction: controllers.ShowOrders,
@@ -89,7 +85,6 @@ var routingCollection = [50]routeMapStruct {
     routeFunction: controllers.DeleteOrder,
     method: "DELETE",
   },
-  // 5
   routeMapStruct{
     urlRoute: "/product",
     routeFunction: controllers.ShowProducts,
@@ -115,7 +110,6 @@ var routingCollection = [50]routeMapStruct {
     routeFunction: controllers.DeleteProduct,
     method: "DELETE",
   },
-  // 4
   routeMapStruct{
     urlRoute: "/outward_invoice",
     routeFunction: controllers.ShowOutwardInvoices,
@@ -136,7 +130,6 @@ var routingCollection = [50]routeMapStruct {
     routeFunction: controllers.UpdateOutwardInvoice,
     method: "PUT",
   },
-  // 4
   routeMapStruct{
     urlRoute: "/outward_invoice_detail",
     routeFunction: controllers.ShowOutwardInvoiceDetails,
@@ -157,7 +150,6 @@ var routingCollection = [50]routeMapStruct {
     routeFunction: controllers.UpdateOutwardInvoiceDetail,
     method: "PUT",
   },
-  // 5
   routeMapStruct{
     urlRoute: "/procure",
     routeFunction: controllers.ShowProcures,
@@ -183,7 +175,6 @@ var routingCollection = [50]routeMapStruct {
     routeFunction: controllers.DeleteProcure,
     method: "DELETE",
   },
-  // 5
   routeMapStruct{
     urlRoute: "/seller",
     routeFunction: controllers.ShowSellers,
@@ -209,7 +200,6 @@ var routingCollection = [50]routeMapStruct {
     routeFunction: controllers.DeleteSeller,
     method: "DELETE",
   },
-  // 4
   routeMapStruct{
     urlRoute: "/storefront",
     routeFunction: controllers.ShowStorefronts,
@@ -230,7 +220,6 @@ var routingCollection = [50]routeMapStruct {
     routeFunction: controllers.UpdateStorefront,
     method: "PUT",
   },
-  // 5
   routeMapStruct{
     urlRoute: "/user",
     routeFunction: controllers.ShowUsers,
@@ -256,7 +245,6 @@ var routingCollection = [50]routeMapStruct {
     routeFunction: controllers.DeleteUser,
     method: "DELETE",
   },
-  // 4
   routeMapStruct{
     urlRoute: "/warehouse",
     routeFunction: controllers.ShowWarehouses,
